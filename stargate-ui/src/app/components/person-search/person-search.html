@@ -1,0 +1,25 @@
+<div class="search-container">
+  <h1>🚀 Stargate — Astronaut Career Tracking</h1>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchName"
+      placeholder="Enter astronaut name..."
+      (keyup.enter)="search()"
+    />
+    <button (click)="search()" [disabled]="loading">
+      {{ loading ? 'Searching...' : 'Search' }}
+    </button>
+  </div>
+
+  <div class="error" *ngIf="error">{{ error }}</div>
+
+  <div class="loading" *ngIf="loading">Loading...</div>
+
+  <app-duty-history
+    *ngIf="!loading && searched && !error"
+    [person]="person"
+    [duties]="duties">
+  </app-duty-history>
+</div>

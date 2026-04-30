@@ -1,0 +1,53 @@
+<div class="results-container" *ngIf="person">
+  <div class="person-card">
+    <h2>{{ person.name }}</h2>
+    <div class="person-details">
+      <div class="detail">
+        <span class="label">Current Rank</span>
+        <span class="value">{{ person.currentRank || 'N/A' }}</span>
+      </div>
+      <div class="detail">
+        <span class="label">Current Duty Title</span>
+        <span class="value">{{ person.currentDutyTitle || 'N/A' }}</span>
+      </div>
+      <div class="detail">
+        <span class="label">Career Start</span>
+        <span class="value">{{ person.careerStartDate ? (person.careerStartDate | date:'mediumDate') : 'N/A' }}</span>
+      </div>
+      <div class="detail">
+        <span class="label">Career End</span>
+        <span class="value">{{ person.careerEndDate ? (person.careerEndDate | date:'mediumDate') : 'Active' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="duties-section" *ngIf="duties.length > 0">
+    <h3>Duty History</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Duty Title</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let duty of duties">
+          <td>{{ duty.rank }}</td>
+          <td>{{ duty.dutyTitle }}</td>
+          <td>{{ duty.dutyStartDate | date:'mediumDate' }}</td>
+          <td>{{ duty.dutyEndDate ? (duty.dutyEndDate | date:'mediumDate') : 'Current' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="no-duties" *ngIf="duties.length === 0">
+    <p>No astronaut duties found for this person.</p>
+  </div>
+</div>
+
+<div class="not-found" *ngIf="!person">
+  <p>No results found.</p>
+</div>
